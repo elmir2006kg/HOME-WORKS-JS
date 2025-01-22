@@ -1,141 +1,64 @@
-// task number-1
-function zadacha1(x, y) {
-  return console.log(x, y);
-}
-
-const zadaCha1 = function (x, y) {
-  return console.log(x, y);
+const createStudent = (firstName, lastName, age, university, faculty, gpa) => {
+  return {
+    firstName: firstName,
+    lastName: lastName,
+    age: age,
+    education: {
+      university: university,
+      faculty: faculty,
+      gpa: gpa,
+    },
+    sayHello: () => {
+      console.log("Kubat Beishenov ");
+    },
+  };
 };
 
-zadaCha1(1, 2);
+const student = createStudent("Kubat", "Beishenov", 24, "ALATOO", "CS", 87);
 
-const zadacHa1 = (x, y) => {
-  return console.log(x, y);
-};
+console.log(student);
 
-// task number-2
-function zadacha2(x, y) {
-  if (x % 2 === 0 && y % 2 === 0) {
-    console.log(`${x} и ${y} четные`);
+2;
+
+let deleteKey = (object, key) => {
+  let obiekt = {
+    object: object,
+  };
+  if ("key" in obiekt) {
+    delete obiekt.key;
+    console.log(obiekt);
   } else {
-    console.log("Один из операндов не четный или оба операнда нечетные ");
+    console.log(`ключ ${key} отсуствует`);
+  }
+};
+
+console.log(deleteKey("object", "key"));
+
+3; //
+const enter = prompt("введите  имейл");
+let sum = 5;
+const uchenik = {
+  name: "elmirbek",
+  age: 18,
+  email: "elmir2006@gmail.com",
+  password: "12345",
+};
+
+if (uchenik.email !== enter) {
+  alert("Извините, такого email не существует");
+} else if (uchenik.email === enter) {
+  let enter2 = prompt("Введите пароль");
+  if (enter2 === uchenik.password) {
+    let enter3 = +prompt("2+3=?");
+    if (sum === enter3) {
+      uchenik.sum = sum;
+      alert(`Верно ваша премия ${sum}`);
+    } else if (sum !== enter3) {
+      alert("Неправильный ответ");
+    }
+  } else if (enter2 !== uchenik.password) {
+    alert("Неверный пароль");
   }
 }
 
-const zadacHa2 = function (x, y) {
-  if (x % 2 === 0 && y % 2 === 0) {
-    console.log(`${x} и ${y} четные`);
-  } else {
-    console.log("Один из операндов не четный или оба операнда нечетные ");
-  }
-};
-zadacha2(2, 3);
-
-const zadaСha2 = (x, y) => {
-  if (x % 2 === 0 && y % 2 === 0) {
-    console.log(`${x} и ${y} четные`);
-  } else {
-    console.log("Один из операндов не четный или оба операнда нечетные ");
-  }
-};
-
-// task-3
-
-const loop1 = (count, count2) => {
-  let keep = 0;
-  for (count; count < count2; count++) {
-    if (count % 2 === 0) {
-      keep = keep + count;
-    }
-  }
-  console.log(keep);
-};
-loop1(3, 200);
-
-const loop2 = function (count, count2) {
-  let keep = 0;
-  for (count; count < count2; count++) {
-    if (count % 2 === 0) {
-      keep = keep + count;
-    }
-  }
-  console.log(keep);
-};
-loop2(1, 100);
-function loop3(count, count2) {
-  let keep = 0;
-  for (count; count < count2; count++) {
-    if (count % 2 === 0) {
-      keep = keep + count;
-    }
-  }
-  console.log(keep);
-}
-loop3(10, 200);
-
-// task-4
-
-function findChar(word, char) {
-  for (let i = 0; i < word.length; i++) {
-    if (word.charAt(i) === char) {
-      console.log(`${true}, ${char}  находится под индексом ${i}`);
-    } else {
-      console.log(false);
-    }
-  }
-}
-
-findChar("Bill gates", "e");
-
-const findchar = (word, char) => {
-  for (let i = 0; i < word.length; i++) {
-    if (word.charAt(i) === char) {
-      console.log(`${true}, ${char}  находится под индексом ${i}`);
-    } else {
-      console.log(false);
-    }
-  }
-};
-findchar("erer", "r");
-
-const findcHar = function (word, char) {
-  for (let i = 0; i < word.length; i++) {
-    if (word.charAt(i) === char) {
-      console.log(`${true}, ${char}  находится под индексом ${i}`);
-    } else {
-      console.log(false);
-    }
-  }
-};
-findcHar("dev", "v");
-
-// task-5
-
-function stringReturn(returnWord) {
-  let lengthOfReturnword = returnWord.length;
-  let keep = " ";
-  for (let i = 0; i <= lengthOfReturnword; lengthOfReturnword--) {
-    keep = keep + returnWord.charAt(lengthOfReturnword);
-  }
-  console.log(keep);
-}
-
-stringReturn("hello");
-
-const strinGreturn = function (returnWord) {
-  let lengthOfReturnword = returnWord.length;
-  let keep = " ";
-  for (let i = 0; i <= lengthOfReturnword; lengthOfReturnword--) {
-    keep = keep + returnWord.charAt(lengthOfReturnword);
-  }
-  console.log(keep);
-};
-
-const strinreturn = (returnWord) => {
-  let lengthOfReturnword = returnWord.length;
-  let keep = " ";
-  for (let i = 0; i <= lengthOfReturnword; lengthOfReturnword--) {
-    keep = keep + returnWord.charAt(lengthOfReturnword);
-  }
-  console.log(keep);
-};
+console.log(uchenik);
