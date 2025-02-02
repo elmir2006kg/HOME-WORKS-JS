@@ -1,59 +1,113 @@
-firstUserName = "Alisher";
-secondUserName = "Nooruz";
-thirdUserName = "Jakshylyk";
-fourthUserName = "Aziret";
-firstUserPoint = 97;
-secondUserPoint = 89;
-thirdUserPoint = 75;
-fourthUserPoint = 90;
+// // Home Work
 
-console.log(`1.${firstUserName} - ${firstUserPoint} баллов из 100   `);
-console.log(`2.${secondUserName} - ${secondUserPoint} баллов из 100   `);
-console.log(`3.${thirdUserName} - ${thirdUserPoint} баллов из 100   `);
-console.log(`4. ${fourthUserName} - ${fourthUserPoint} баллов из 100 `);
-console.log(
-  "Экзамендин орточо баллы: " +
-    (firstUserPoint + secondUserPoint + thirdUserPoint + fourthUserPoint) / 4 +
-    " балл"
-);
+const user = {
+  id: 1,
+  first_name: "Garrott",
+  last_name: "Eberdt",
+  email: "geberdt0@wp.com",
+  gender: "Male",
+  ip_address: "49.230.15.110",
+  isAdmin: true,
+};
 
-let a = 4;
+const { id, first_name, last_name, email, gender, ip_address, isAdmin } = user;
+console.log(first_name);
 
-for (i = 1; i < 11; i++) {
-  b = a * i;
-  console.log(`${a} * ${i} = ${b}`);
-}
+const animals = ["apple", "banana", "lemon", "kiwi", true];
 
-console.log("");
+const [apple, banana, lemon, kiwi, True] = animals;
 
-let num = 4;
-let num1 = 1 * num;
-let num2 = 2 * num;
-let num3 = 3 * num;
-let num4 = 4 * num;
-let num5 = 5 * num;
-let num6 = 6 * num;
-let num7 = 7 * num;
-let num8 = 8 * num;
-let num9 = 9 * num;
-let num10 = 10 * num;
+const workers = [
+  {
+    id: 1,
+    name: "Emile",
+    lastname: "Van Weedenburg",
+    email: "evanweedenburg0@technorati.com",
+  },
+  {
+    id: 2,
+    name: "Orv",
+    lastname: "Gretton",
+    email: "ogretton1@about.me",
+  },
+];
+workers.forEach(({ id, name, lastname, email }) => {
+  console.log([id, name, lastname, email]);
+});
 
-console.log(`${num} * 1 = ${num1}`);
-console.log(`${num} * 2 = ${num2}`);
-console.log(`${num} * 3 = ${num3}`);
-console.log(`${num} * 4=  ${num4}`);
-console.log(`${num} * 5 = ${num5}`);
-console.log(`${num} * 6 = ${num6} `);
-console.log(`${num} * 7 = ${num7}`);
-console.log(`${num} * 8 = ${num8}`);
-console.log(`${num} * 9 = ${num9}`);
-console.log(`${num} * 10 = ${num10}`);
+const product = {
+  id: 1,
+  details: {
+    title: "Phone",
+    price: 300,
+  },
+};
 
-let zapros = prompt("Введите ваше имя");
-let alert1 = alert("Вы успешно зарегистрировались");
-let accept = confirm(
-  "При перезагрузке сайта, введённые данные на форме будут очищены, Вы уверены что хотите перезагрузить?"
-);
+const { title, price } = product.details;
+console.log(title, price);
 
-console.log(zapros);
-console.log(accept);
+const posts = {
+  name: "post",
+  isLaoding: true,
+
+  byId: {
+    post1: {
+      id: "post1",
+      author: "user1",
+      body: "......",
+      comments: ["comment1", "comment2"],
+    },
+    posts2: {
+      id: "post2",
+      author: "user2",
+      body: "......",
+      comments: ["comment3", "comment4", "comment5"],
+    },
+  },
+  allIds: ["post1", "post2"],
+};
+// task1
+
+const copyOfPosts2 = Object.assign({}, { ...posts });
+console.log(copyOfPosts2);
+
+// task2
+
+const copyOfPosts = JSON.parse(JSON.stringify({ ...posts }));
+
+console.log(copyOfPosts);
+
+//////////////
+// task3
+
+const post = {
+  name: "posts",
+  isLaoding: true,
+  id: "post1",
+  author: "user1",
+  body: "......",
+  comments: ["comment1", "comment2"],
+};
+
+const { comments: color, hello, ...rest } = post;
+console.log(rest);
+
+// color равен  ['comment1', 'comment2']
+
+// hello равен undefined потомучто нет такого ключа в post  .
+
+// rest  равен {name: 'posts', isLaoding: true, id: 'post1', author: 'user1', body: '......'}
+
+// task-4
+
+const comments = ["comment3", "comment4", "comment5", "comment1"];
+
+const [Undefined, comment1, ...rest2] = comments;
+console.log(comment1);
+
+// undefined  Uncaught SyntaxError: Identifier 'undefined' has already been declared (at main2.js:1:1) ке барабар
+// undefined тти перменный катары берсе болбойт спец типтерди  переменный катары берсе болбойт
+
+//comment1 "comment4" ко барабар болуш керек эле
+
+// rest   "comment5", "comment1" ге барабар болот эле
