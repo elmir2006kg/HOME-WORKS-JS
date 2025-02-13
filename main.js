@@ -25,7 +25,6 @@ button.addEventListener("click", (event) => {
   window.addEventListener("beforeupload", () => {
     window.addEventListener("online", () => {
       localStorage.getItem(JSON.parse(Arra));
-      console.log(a);
     });
   });
 });
