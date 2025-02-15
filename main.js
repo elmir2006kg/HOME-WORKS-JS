@@ -1,45 +1,45 @@
-1 - task;
+// 1 - task;
 
-const ptag = document.querySelector(".hello");
+// const ptag = document.querySelector(".hello");
 
-setTimeout(() => {
-  ptag.textContent = "Ураа";
-}, 10000);
+// setTimeout(() => {
+//   ptag.textContent = "Ураа";
+// }, 10000);
 
-task2;
+// task2;
 
-let y;
-const div = document.querySelector("div");
+// let y;
+// const div = document.querySelector("div");
 
-function changercolor() {
-  y = Math.floor(Math.random() * 12852);
-}
-let r = setInterval(() => {
-  changercolor();
-  div.style.backgroundColor = "#" + y;
-}, 1000);
+// function changercolor() {
+//   y = Math.floor(Math.random() * 12852);
+// }
+// let r = setInterval(() => {
+//   changercolor();
+//   div.style.backgroundColor = "#" + y;
+// }, 1000);
 
-setTimeout(() => {
-  clearTimeout(r);
-}, 60000);
+// setTimeout(() => {
+//   clearTimeout(r);
+// }, 60000);
 
-task - 3;
+// task - 3;
 
-const input = document.querySelector("input");
-const ptag2 = document.querySelector(".ptag2");
-const button = document.querySelector(".add");
+// const input = document.querySelector("input");
+// const ptag2 = document.querySelector(".ptag2");
+// const button = document.querySelector(".add");
 
-button.addEventListener("click", () => {
-  setInterval(() => {
-    if (inputvalue < 0) return;
-    ptag2.textContent = inputvalue--;
-  }, 1000);
+// button.addEventListener("click", () => {
+//   setInterval(() => {
+//     if (inputvalue < 0) return;
+//     ptag2.textContent = inputvalue--;
+//   }, 1000);
 
-  let inputvalue = input.value;
-  input.value = "";
-});
+//   let inputvalue = input.value;
+//   input.value = "";
+// });
 
-task - 4;
+// task - 4;
 
 const input1 = document.querySelector(".input1");
 let inputvalue1;
@@ -104,7 +104,7 @@ input3.addEventListener("keydown", (event) => {
         if (inputvalue < 0) return;
 
         span3.textContent = inputvalue--;
-      }, 1000);
+      }, 1300);
       restart.addEventListener("click", () => {
         span1.textContent = inputvalue1;
         let t = input3.value;
