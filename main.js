@@ -97,19 +97,22 @@ input3.addEventListener("keydown", (event) => {
       b = setInterval(() => {
         if (inputvalue < 1) {
           if (inputvalue1 < 0) return;
-          span1.textContent = inputvalue1--;
+          span1.textContent = inputvalue1 - 1;
           inputvalue = 59;
         }
 
         if (inputvalue < 0) return;
 
         span3.textContent = inputvalue--;
-      }, 1300);
+      }, 1000);
       restart.addEventListener("click", () => {
         span1.textContent = inputvalue1;
         let t = input3.value;
         inputvalue = t;
         span3.textContent = inputvalue--;
+        clearInterval(a);
+        clearInterval(b);
+        pause.style.display = "none";
       });
     });
   }
