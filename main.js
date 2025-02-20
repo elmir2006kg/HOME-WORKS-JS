@@ -1,87 +1,115 @@
-const Body = document.querySelector("body");
-Body.style.backgroundColor = "skyblue";
-Body.style.display = "flex";
-Body.style.justifyContent = "center";
-Body.style.alignItems = "center";
-Body.style.width = "1040px";
-Body.style.height = "740px";
+const BaseUrl = "https://d47df39b75e74366.mokky.dev/items";
 
-const Maintag = document.createElement("main");
-Maintag.style.backgroundColor = "white";
-Maintag.style.width = "940px";
-Maintag.style.height = "580px";
-Maintag.style.borderRadius = "30px";
-Maintag.style.display = "flex";
-Maintag.style.flexDirection = "column";
-Maintag.style.alignItems = "center";
+const input = document.querySelector("input");
+const addbtn = document.querySelector("button");
+const ul = document.querySelector("ul");
 
-const h1tag = document.createElement("h1");
-h1tag.style.color = "darkblue";
-h1tag.innerText = "TODO-LIST";
-
-Maintag.appendChild(h1tag);
-
-document.body.appendChild(Maintag);
-const div1 = document.createElement("div");
-div1.style.marginBottom = "30px";
-Maintag.append(div1);
-
-const inputtag = document.createElement("input");
-inputtag.value = "Enter new todo...";
-inputtag.addEventListener("click", () => {
-  inputtag.value = "";
+document.addEventListener("DOMContentLoaded", async () => {
+  await getData();
 });
 
-inputtag.style.color = "gray";
-inputtag.style.width = "440px";
-inputtag.style.height = "45px";
-inputtag.style.border = "2px solid darkblue";
-div1.append(inputtag);
+addbtn.addEventListener("click", async (event) => {
+  event.preventDefault();
 
-const button1 = document.createElement("button");
-button1.textContent = "ADD";
-button1.style.width = "110px";
-button1.style.height = "45px";
-button1.style.borderRadius = "30px";
-button1.style.marginLeft = "10px";
-button1.style.backgroundColor = "DeepPink";
-button1.style.color = "white";
-button1.style.fontSize = "20px";
-div1.append(button1);
+  const inputValue = input.value.trim();
+  if (inputValue !== "") {
+    const newTodo = {
+      id: Date.now().toString(),
+      title: inputValue,
+      bool: false,
+    };
+    await Post(newTodo);
+    input.value = "";
+  }
+});
 
-button1.addEventListener("click", () => {
-  const List = document.createElement("div");
-  const innerPtag = document.createElement("p");
-  const buttonin = document.createElement("button");
+async function Post(object) {
+  try {
+    const response = await fetch(BaseUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(object),
+    });
 
-  List.style.width = "600px";
-  List.style.height = "25px";
-  List.style.margin = "10px";
+    getData();
+  } catch (error) {
+    console.error("Ошибка:", error);
+  }
+}
 
-  List.style.backgroundColor = "DodgerBlue";
-  List.style.display = "flex";
-  List.style.justifyContent = "space-between";
-  List.style.padding = "27px";
+async function getData() {
+  try {
+    const response = await fetch(BaseUrl);
+    const data = await response.json();
+    render(data);
+  } catch (error) {
+    console.error("Ошибка:", error);
+  }
+}
 
-  innerPtag.innerText = inputtag.value;
-  innerPtag.style.color = "white";
-  innerPtag.style.marginTop = "1px";
-  innerPtag.style.fontSize = "20px";
+function render(tasks) {
+  ul.innerHTML = "";
 
-  buttonin.textContent = "DELETE";
-  buttonin.style.width = "90px";
-  buttonin.style.height = "40px";
-  buttonin.style.borderRadius = "40px";
-  buttonin.style.marginTop = "-10px";
-  buttonin.style.backgroundColor = "Tomato";
-  buttonin.style.color = "white";
-  buttonin.style.fontSize = "20px";
+  tasks.forEach(({ title, id, bool }) => {
+    const li = document.createElement("li");
+    const div = document.createElement("div");
+    const div2 = document.createElement("div2");
+    const ptag = document.createElement("span");
+    const checkbox = document.createElement("input");
+    const deleteBtn = document.createElement("button");
 
-  Maintag.appendChild(List);
-  List.append(innerPtag, buttonin);
-  inputtag.value = "";
+    deleteBtn.textContent = "delet";
+    ptag.textContent = title;
 
-  buttonin.addEventListener("click", () => {
-    List.remove();
+    li.className = "li";
+    div.className = "divOfLi";
+    deleteBtn.className = "deletebtn";
+    ptag.classList.add("ptag");
+    div2.className = "div2";
+
+    checkbox.type = "checkbox";
+    checkbox.className = "checkbox";
+    checkbox.checked = bool;
+    if (bool) {
+      ptag.className = "line";
+    }
+
+    checkbox.addEventListener("change", async () => {
+      chekboxes(id, checkbox.checked);
+    });
+
+    deleteBtn.addEventListener("click", async () => {
+      deleteItem(id);
+    });
+    div2.append(checkbox, deleteBtn);
+    div.append(ptag, div2);
+    li.appendChild(div);
+    ul.appendChild(li);
   });
-});
+}
+
+async function deleteItem(id) {
+  try {
+    const response = await fetch(`${BaseUrl}/${id}`, {
+      method: "DELETE",
+    });
+
+    getData();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function chekboxes(id, checked) {
+  try {
+    const response = await fetch(`${BaseUrl}/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ bool: checked }),
+    });
+
+    getData();
+  } catch (error) {
+    console.error(error);
+  }
+}
