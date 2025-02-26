@@ -1,115 +1,55 @@
-const BaseUrl = "https://d47df39b75e74366.mokky.dev/items";
-
-const input = document.querySelector("input");
-const addbtn = document.querySelector("button");
+const BaseUrl = "https://rickandmortyapi.com/api/character";
 const ul = document.querySelector("ul");
+const button = document.querySelector("button");
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await getData();
-});
-
-addbtn.addEventListener("click", async (event) => {
-  event.preventDefault();
-
-  const inputValue = input.value.trim();
-  if (inputValue !== "") {
-    const newTodo = {
-      id: Date.now().toString(),
-      title: inputValue,
-      bool: false,
-    };
-    await Post(newTodo);
-    input.value = "";
-  }
-});
-
-async function Post(object) {
-  try {
-    const response = await fetch(BaseUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(object),
-    });
-
-    getData();
-  } catch (error) {
-    console.error("Ошибка:", error);
-  }
+function bodycolor() {
+  return Math.round(Math.random() * 12765);
 }
 
-async function getData() {
+button.addEventListener("click", () => {
+  const body = document.querySelector("body");
+  const t = bodycolor();
+  body.style.backgroundColor = `#${t}`;
+});
+
+async function getdata() {
   try {
     const response = await fetch(BaseUrl);
     const data = await response.json();
-    render(data);
+
+    render(data.results);
+    console.log(data.results);
   } catch (error) {
-    console.error("Ошибка:", error);
+    console.log(error);
   }
 }
 
-function render(tasks) {
+getdata();
+
+async function render(data) {
   ul.innerHTML = "";
 
-  tasks.forEach(({ title, id, bool }) => {
+  return data.map((items) => {
     const li = document.createElement("li");
+    const img = document.createElement("img");
     const div = document.createElement("div");
-    const div2 = document.createElement("div2");
-    const ptag = document.createElement("span");
-    const checkbox = document.createElement("input");
-    const deleteBtn = document.createElement("button");
+    const ptg = document.createElement("p");
+    ptg.textContent = items.name;
+    img.src = items.image;
+    const alive = items.status;
+    console.log(alive);
 
-    deleteBtn.textContent = "delet";
-    ptag.textContent = title;
-
-    li.className = "li";
-    div.className = "divOfLi";
-    deleteBtn.className = "deletebtn";
-    ptag.classList.add("ptag");
-    div2.className = "div2";
-
-    checkbox.type = "checkbox";
-    checkbox.className = "checkbox";
-    checkbox.checked = bool;
-    if (bool) {
-      ptag.className = "line";
+    if (alive === "Alive") {
+      div.style.border = "5px solid green";
+    } else if (alive == "unknown") {
+      div.style.border = "5px solid red";
+    } else if (alive == "Dead") {
+      div.style.border = "5px solid black";
     }
 
-    checkbox.addEventListener("change", async () => {
-      chekboxes(id, checkbox.checked);
-    });
-
-    deleteBtn.addEventListener("click", async () => {
-      deleteItem(id);
-    });
-    div2.append(checkbox, deleteBtn);
-    div.append(ptag, div2);
+    div.append(img, ptg);
     li.appendChild(div);
+
     ul.appendChild(li);
   });
-}
-
-async function deleteItem(id) {
-  try {
-    const response = await fetch(`${BaseUrl}/${id}`, {
-      method: "DELETE",
-    });
-
-    getData();
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-async function chekboxes(id, checked) {
-  try {
-    const response = await fetch(`${BaseUrl}/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ bool: checked }),
-    });
-
-    getData();
-  } catch (error) {
-    console.error(error);
-  }
 }
