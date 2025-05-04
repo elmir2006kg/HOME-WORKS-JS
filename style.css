@@ -1,0 +1,36 @@
+.div0 {
+  width: 300px;
+  height: 200px;
+  background-color: black;
+}
+.div2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40px;
+}
+article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.p {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+#input1,
+#input2 {
+  width: 70px;
+  margin: 10px;
+}
+
+.span1,
+.twopoint,
+.pause {
+  display: none;
+}
